@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Clicker</title>
+
+    <style>
+        .sectionLeft {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sectionLeft">
+    <p>Score: <span id="score">0</span></p>
+    <img src="images/tostitos-dip-smooth-cheesy.webp" height="126" width="76" onclick="addToScore(1)">
+
+    <button onclick="buyCursor()">Buy Cursor [<span id="cursorCost">15</span>] -- <span id="cursors">0</span></button>
+    <button onclick="buyWorker()">Buy Worker [<span id="workerCost">100</span>] -- <span id="workers">0</span></button>
+    </div>
+    <script>
+        var score = 0;
+
+        var cursorCost = 15;
+        var cursors = 0;
+        var workerCost = 100;
+        var workers = 0;
+
+
+        function buyCursor() {
+            if (score >= cursorCost) {
+                score = score - cursorCost;
+                cursors = cursors + 1;
+                document.getElementById("cursorCost").innerHTML = cursorCost;
+                document.getElementById("cursors").innerHTML = cursors;
+                document.getElementById("score").innerHTML = score;
+            }
+        }
+        function buyWorker() {
+            if (score >= workerCost) {
+                score = score - workerCost;
+                workers = workers + 1;
+                document.getElementById("workerCost").innerHTML = workerCost;
+                document.getElementById("workers").innerHTML = workers;
+                document.getElementById("score").innerHTML = score;
+            }
+        }
+        function addToScore(amount) {
+            score = score + amount;
+            document.getElementById("score").innerHTML = score;
+        }
+
+        setInterval(function() {
+            score = score + cursors;
+            score = score + workers * 15;
+            document.getElementById("score").innerHTML = score;
+
+            document.title = score + " score + Clicker"
+        }, 1000)
+    </script>
+</body>
